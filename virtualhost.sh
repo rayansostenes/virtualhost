@@ -33,18 +33,14 @@ do
 done
 sitesAvailabledomain=$sitesAvailable$domain.conf
 if [ "$rootDir" == "" ]; then
-	rootdir=${domain//./}
-fi
-
-### if root dir starts with '/', don't use /var/www as default starting point
-if [[ "$rootDir" =~ ^/ ]]; then
-	userDir=''
+	rootdir=${domain//./_}
 fi
 
 rootDir=$userDir$rootDir
 
 if [ "$action" == 'create' ]
 	then
+		echo $rootDir
 		### check if domain already exists
 		if [ -e $sitesAvailabledomain ]; then
 			echo -e $"This domain already exists.\nPlease Try Another one"
@@ -56,7 +52,7 @@ if [ "$action" == 'create' ]
 			### create the directory
 			mkdir $rootDir
 			### give permission to root dir
-			chmod 755 $rootDir
+			chmod 777 $rootDir
 			### write test file in the new domain dir
 			if ! echo "<?php echo phpinfo(); ?>" > $rootDir/phpinfo.php
 			then
