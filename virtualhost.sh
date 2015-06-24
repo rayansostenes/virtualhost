@@ -11,7 +11,7 @@ email='webmaster@localhost'
 sitesEnable='/etc/apache2/sites-enabled/'
 sitesAvailable='/etc/apache2/sites-available/'
 userDir='/var/www/'
-sitesAvailabledomain=$sitesAvailable$domain.conf
+
 
 ### don't modify from here unless you know what you are doing ####
 
@@ -31,7 +31,7 @@ do
 	echo -e $"Please provide domain. e.g.dev,staging"
 	read domain
 done
-
+sitesAvailabledomain=$sitesAvailable$domain.conf
 if [ "$rootDir" == "" ]; then
 	rootdir=${domain//./}
 fi
